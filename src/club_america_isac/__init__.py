@@ -1,0 +1,1 @@
+"""Club América ISAC 2026 analysis package."""

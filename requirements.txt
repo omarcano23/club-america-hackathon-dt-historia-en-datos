@@ -1,0 +1,9 @@
+statsbombpy
+pandas
+numpy
+matplotlib
+mplsoccer
+python-dotenv
+pyyaml
+jupyter
+pytest

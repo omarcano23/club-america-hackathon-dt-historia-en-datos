@@ -1,0 +1,36 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Licensed/restricted competition data: do not commit
+data/raw/*
+data/processed/*
+data/synthetic/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/synthetic/.gitkeep
+
+# Local outputs / OS
+report/*.html
+.DS_Store
+Thumbs.db

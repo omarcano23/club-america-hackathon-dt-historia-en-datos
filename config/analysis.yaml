@@ -1,0 +1,17 @@
+project:
+  name: "Club América ISAC 2026"
+  competition: "ISAC 2026"
+  team: "Club América"
+  coach: "TO_CONFIRMAR"
+  timezone: "America/Mexico_City"
+
+data:
+  # Fill only after verifying the authorized match list.
+  match_ids: []
+  require_360: false
+
+framework:
+  # Provisional definitions; document and validate before final analysis.
+  transition_window_seconds: null
+  high_press_definition: "TO_DEFINE_FROM_DATA_AND_FOOTBALL_CONTEXT"
+  possession_definition: "TO_DOCUMENT_AND_TEST"
