@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "project": "El Vuelo del Bicampeón",
+    "phase": "6.2-A",
+    "purpose": "Definir reglas editoriales antes de conectar contenido y cifras a la interfaz.",
+    "language": "es",
+    "status": "BORRADOR_PARA_APROBACION",
+    "changes_existing_dashboard": false
+  },
+  "central_thesis": {
+    "title": "Control territorial, progresión y adaptación competitiva",
+    "text": "El América de Jardine puede estudiarse como un equipo que busca instalarse en campo rival, transformar su circulación en progresión y recuperar el balón mediante presión. Los datos permiten explorar cómo se relacionan estos mecanismos con el peligro generado y el comportamiento según el contexto, distinguiendo los patrones consolidados de las asociaciones aún inciertas."
+  },
+  "audience": {
+    "primary": "Aficionados al fútbol y lectores interesados en entender el juego.",
+    "secondary": [
+      "Analistas y profesionales del fútbol",
+      "Evaluadores del concurso",
+      "Lectores interesados en metodología y datos"
+    ],
+    "editorial_rule": "Explicar primero el significado futbolístico; después, la métrica y su detalle metodológico."
+  },
+  "narrative_structure": [
+    {
+      "id": "capitulo_1",
+      "name": "La identidad",
+      "question": "¿Dónde se instalaba el América?",
+      "purpose": "Explorar el dominio territorial y su evolución sin confundir presencia en campo rival con generación de ocasiones.",
+      "visual_role": "Comparación temporal del dominio territorial y la presión."
+    },
+    {
+      "id": "capitulo_2",
+      "name": "La progresión",
+      "question": "¿Cómo convertía la circulación en avance?",
+      "purpose": "Comparar rutas de progresión y su relación con el avance hacia zonas peligrosas.",
+      "visual_role": "Cancha por carriles, rutas y comparación de resultados."
+    },
+    {
+      "id": "capitulo_3",
+      "name": "La recuperación",
+      "question": "¿Presionar más se asociaba con recuperar mejor?",
+      "purpose": "Examinar la relación entre presión y recuperación, mostrando la incertidumbre estadística.",
+      "visual_role": "Comparación de tasas con intervalo de confianza."
+    },
+    {
+      "id": "capitulo_4",
+      "name": "La adaptación",
+      "question": "¿Qué cambiaba según el marcador?",
+      "purpose": "Describir diferencias de comportamiento al ganar, empatar o perder sin afirmar causalidad.",
+      "visual_role": "Comparaciones por estado del marcador y contexto."
+    },
+    {
+      "id": "capitulo_5",
+      "name": "El balón parado",
+      "question": "¿Qué amenazas aparecían cuando el juego se detenía?",
+      "purpose": "Explorar córners, tiros libres y saques de banda por separado.",
+      "visual_role": "Mapas de ejecuciones, destinos y remates."
+    }
+  ],
+  "evidence_statuses": {
+    "RESPALDADO": "Definición, universo, denominador y resultado reconciliados con la fuente de origen.",
+    "DESCRIPTIVO": "Resume lo observado en una muestra; no implica causalidad ni necesariamente generaliza fuera de ella.",
+    "PROVISIONAL": "Resultado exploratorio con validaciones pendientes o incertidumbre que debe explicitarse junto al hallazgo.",
+    "NO_EVALUABLE": "La muestra, definición o calidad de los datos no permite responder la pregunta planteada.",
+    "PENDIENTE_DE_VERIFICACION": "No publicar como resultado factual hasta reconciliar su origen."
+  },
+  "editorial_rules": [
+    "No presentar una cifra como validada solo porque aparezca en web_data.json.",
+    "Cada afirmación cuantitativa debe enlazarse con una fuente identificable.",
+    "Registrar definición, numerador, denominador y universo de cada métrica.",
+    "Mostrar intervalos de confianza cuando sean relevantes y estén calculados correctamente.",
+    "No describir asociaciones como causas.",
+    "Distinguir goles totales, goles sin penalti, xG y npxG.",
+    "No comparar métricas si sus universos o definiciones no son compatibles.",
+    "Explicar términos técnicos en lenguaje futbolístico en su primera aparición.",
+    "No inventar citas, declaraciones, secuencias de juego ni conclusiones tácticas.",
+    "Si una cifra no está reconciliada, marcarla como pendiente y no usarla en un titular definitivo."
+  ],
+  "standard_chapter_layers": [
+    "Pregunta futbolística",
+    "Hallazgo principal y estado de evidencia",
+    "Visualización dominante",
+    "Exploración interactiva",
+    "Lectura futbolística y límite interpretativo",
+    "Metodología y procedencia"
+  ],
+  "design_principles": {
+    "identity": [
+      "Identidad visual americanista reconocible",
+      "Estética editorial deportiva, no un panel corporativo genérico",
+      "Fotografías y recursos oficiales o autorizados"
+    ],
+    "visual_integrity": [
+      "Evitar dobles ejes que sugieran relaciones engañosas",
+      "Mantener escalas comparables en las comparaciones",
+      "No depender solo del color para comunicar evidencia",
+      "Mostrar el tamaño de muestra y la incertidumbre donde corresponda"
+    ],
+    "interaction": [
+      "Cada filtro debe modificar realmente los datos compatibles",
+      "Los tooltips deben explicar la métrica y su definición",
+      "Las transiciones deben ser breves y respetar movimiento reducido",
+      "La interfaz debe funcionar en móvil y con teclado"
+    ]
+  },
+  "publication_gate": [
+    "Titular y texto revisados editorialmente",
+    "Fuente y universo de la cifra identificados",
+    "Definición y denominador reconciliados",
+    "Estado de evidencia asignado",
+    "Limitaciones visibles para el lector",
+    "Ninguna cifra pendiente presentada como confirmada"
+  ]
+}

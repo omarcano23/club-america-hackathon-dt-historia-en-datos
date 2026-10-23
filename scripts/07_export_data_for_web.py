@@ -1,0 +1,573 @@
+# -*- coding: utf-8 -*-
+"""
+07_export_data_for_web.py
+Club América | Historia en datos
+
+Prepara el contenido analítico para la experiencia web.
+No recalcula métricas ni depende del CSV obsoleto.
+Salida: report/web_data.json
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from datetime import datetime, timezone
+
+
+# ------------------------------------------------------------
+# RUTAS
+# ------------------------------------------------------------
+
+ROOT = Path(__file__).resolve().parents[1]
+REPORT_DIR = ROOT / "report"
+OUTPUT_FILE = REPORT_DIR / "web_data.json"
+
+REPORT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# ------------------------------------------------------------
+# DATOS ANALÍTICOS REPORTADOS EN LAS FASES 0 A 4
+# Los valores se conservan como resultados ya reportados.
+# ------------------------------------------------------------
+
+DATA = {
+    "meta": {
+        "title": "EL VUELO DEL BICAMPEÓN",
+        "subtitle": "Una forma de jugar. Una historia que contar.",
+        "team": "Club América",
+        "coach": "André Jardine",
+        "seasons": "2023-24 y 2024-25",
+        "matches": 91,
+        "competition_breakdown": [
+            {"label": "Temporada regular", "matches": 66},
+            {"label": "Liguilla", "matches": 24},
+            {"label": "Play-In", "matches": 1},
+        ],
+        "source": "Eventos de partido y datos StatsBomb 360.",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+    },
+
+    "navigation": [
+        {"id": "identidad", "label": "La identidad"},
+        {"id": "progresion", "label": "La progresión"},
+        {"id": "recuperacion", "label": "La recuperación"},
+        {"id": "marcador", "label": "El marcador"},
+        {"id": "balon-parado", "label": "El balón parado"},
+    ],
+
+    "chapters": [
+        {
+            "id": "identidad",
+            "number": "01",
+            "title": "La identidad de las Águilas",
+            "subtitle": "Una identidad se reconoce en los detalles que se repiten.",
+            "intro": (
+                "La identidad no se resume en tener el balón. También importa "
+                "dónde se juega y cómo se limita la salida del rival. Field Tilt "
+                "y PPDA describen dos partes distintas de esa historia."
+            ),
+            "metrics": [
+                {
+                    "label": "Field Tilt medio",
+                    "value": "63.60%",
+                    "description": (
+                        "Participación del América en los pases registrados "
+                        "en la zona ofensiva según la definición utilizada "
+                        "en el análisis."
+                    ),
+                },
+                {
+                    "label": "Field Tilt mediano",
+                    "value": "66.63%",
+                    "description": (
+                        "El valor central al ordenar los 66 partidos de "
+                        "temporada regular. La mediana reduce la influencia "
+                        "de partidos atípicos."
+                    ),
+                },
+                {
+                    "label": "PPDA agregado",
+                    "value": "9.89",
+                    "description": (
+                        "16,227 pases elegibles del rival divididos entre "
+                        "1,640 acciones defensivas elegibles del América."
+                    ),
+                },
+                {
+                    "label": "PPDA mediano por partido",
+                    "value": "9.90",
+                    "description": (
+                        "La mediana de PPDA por partido. El promedio por "
+                        "partido reportado fue 10.70."
+                    ),
+                },
+            ],
+            "highlights": [
+                {
+                    "title": "Territorio ofensivo",
+                    "text": (
+                        "El Field Tilt medio de 63.60% describe una mayor "
+                        "participación del América en el territorio ofensivo "
+                        "medido por esta métrica."
+                    ),
+                },
+                {
+                    "title": "Presión sobre la salida",
+                    "text": (
+                        "El PPDA resume cuántos pases permite un equipo al "
+                        "rival por cada acción defensiva elegible. En general, "
+                        "un número menor representa una presión más intensa "
+                        "según esta definición."
+                    ),
+                },
+            ],
+            "methodology": [
+                "Field Tilt medio y mediano: temporada regular, 66 partidos.",
+                (
+                    "PPDA agregado: total de pases elegibles del rival dividido "
+                    "entre el total de acciones defensivas elegibles."
+                ),
+                (
+                    "PPDA medio por partido y PPDA mediano por partido son "
+                    "resúmenes distintos del comportamiento entre encuentros."
+                ),
+            ],
+        },
+
+        {
+            "id": "progresion",
+            "number": "02",
+            "title": "El camino hacia adelante",
+            "subtitle": (
+                "Tener el balón es el comienzo. La diferencia está en lo que "
+                "haces con él."
+            ),
+            "intro": (
+                "La construcción importa cuando ayuda a avanzar. En las "
+                "posesiones elegibles estudiadas, la ruta que pasa del centro "
+                "hacia el exterior aparece en una parte de los casos y se "
+                "asocia con una mayor progresión."
+            ),
+            "metrics": [
+                {
+                    "label": "Posesiones por ruta centro-exterior",
+                    "value": "22.08%",
+                    "description": "504 de 2,283 posesiones elegibles.",
+                },
+                {
+                    "label": "Progresión con esa ruta",
+                    "value": "64.15%",
+                    "description": (
+                        "Porcentaje reportado de progresión en las posesiones "
+                        "que siguieron la ruta centro-exterior."
+                    ),
+                },
+                {
+                    "label": "Progresión en otras posesiones",
+                    "value": "31.20%",
+                    "description": (
+                        "Porcentaje reportado para las demás posesiones "
+                        "elegibles del análisis."
+                    ),
+                },
+                {
+                    "label": "Diferencia observada",
+                    "value": "+32.95 pp",
+                    "description": (
+                        "Diferencia en puntos porcentuales entre ambos grupos."
+                    ),
+                },
+            ],
+            "comparison": {
+                "title": "Progresión según la ruta de construcción",
+                "unit": "%",
+                "items": [
+                    {
+                        "label": "Ruta centro-exterior",
+                        "value": 64.15,
+                    },
+                    {
+                        "label": "Otras posesiones elegibles",
+                        "value": 31.20,
+                    },
+                ],
+            },
+            "highlights": [
+                {
+                    "title": "Una ruta que destaca",
+                    "text": (
+                        "La progresión observada fue mayor en las posesiones "
+                        "que siguieron la ruta centro-exterior."
+                    ),
+                },
+                {
+                    "title": "Asociación, no causalidad",
+                    "text": (
+                        "La diferencia no demuestra por sí sola que esa ruta "
+                        "cause una mejor progresión. El contexto, la presión "
+                        "rival y otras decisiones también pueden influir."
+                    ),
+                },
+            ],
+            "methodology": [
+                "Base: 2,283 posesiones elegibles; 504 siguieron la ruta estudiada.",
+                (
+                    "Diferencia reportada: +32.95 puntos porcentuales, con "
+                    "intervalo de confianza del 95% de +27.21 a +38.57."
+                ),
+                (
+                    "La comparación describe una asociación en los datos "
+                    "observados; no es una prueba causal."
+                ),
+            ],
+        },
+
+        {
+            "id": "recuperacion",
+            "number": "03",
+            "title": "Volver a tener el balón",
+            "subtitle": (
+                "La presión no termina cuando empieza. Termina cuando cambia "
+                "la posesión."
+            ),
+            "intro": (
+                "Para explorar la relación entre presión y recuperación, se "
+                "compararon partidos de temporada regular según el umbral de "
+                "PPDA definido en el análisis. La diferencia observada no fue "
+                "concluyente."
+            ),
+            "metrics": [
+                {
+                    "label": "Partidos de presión alta",
+                    "value": "33",
+                    "description": "PPDA menor o igual a 9.90.",
+                },
+                {
+                    "label": "Partidos de presión baja",
+                    "value": "33",
+                    "description": "PPDA mayor a 9.90.",
+                },
+                {
+                    "label": "Diferencia observada",
+                    "value": "+4.74 pp",
+                    "description": (
+                        "Diferencia reportada entre los grupos en la medida "
+                        "de recuperación evaluada."
+                    ),
+                },
+                {
+                    "label": "Valor p",
+                    "value": "0.2429",
+                    "description": (
+                        "El resultado no alcanza el umbral convencional de "
+                        "significación estadística de 0.05."
+                    ),
+                },
+            ],
+            "uncertainty": {
+                "label": "Intervalo de confianza del 95%",
+                "value": "−2.57 a +12.03 pp",
+                "lower": -2.57,
+                "upper": 12.03,
+                "estimate": 4.74,
+            },
+            "highlights": [
+                {
+                    "title": "Una diferencia que requiere cautela",
+                    "text": (
+                        "La estimación favorece al grupo de presión alta, "
+                        "pero el intervalo de confianza incluye tanto valores "
+                        "negativos como positivos."
+                    ),
+                },
+                {
+                    "title": "No es una conclusión definitiva",
+                    "text": (
+                        "Con los datos y el método reportados no hay evidencia "
+                        "suficiente para afirmar una diferencia concluyente "
+                        "entre los grupos."
+                    ),
+                },
+            ],
+            "methodology": [
+                "33 partidos en cada grupo, todos de temporada regular.",
+                "Umbral: PPDA menor o igual a 9.90 para presión alta.",
+                "Se reportaron 863 transacciones candidatas en el análisis.",
+                (
+                    "La comparación es observacional y no permite atribuir "
+                    "causalidad a la presión."
+                ),
+            ],
+        },
+
+        {
+            "id": "marcador",
+            "number": "04",
+            "title": "El partido cambia. El reto también.",
+            "subtitle": (
+                "El marcador transforma las decisiones y los espacios disponibles."
+            ),
+            "intro": (
+                "El marcador oficial es la referencia para el resultado. Los "
+                "goles reconstruidos a partir de eventos son una comprobación "
+                "analítica distinta. En dos partidos, ambas fuentes no coinciden "
+                "y las diferencias se dejan visibles."
+            ),
+            "metrics": [
+                {
+                    "label": "Partidos con marcador de referencia",
+                    "value": "91",
+                    "description": "Todos los partidos del conjunto analizado.",
+                },
+                {
+                    "label": "Coincidencias con eventos",
+                    "value": "89 de 91",
+                    "description": (
+                        "Los goles reconstruidos coinciden con el marcador "
+                        "de referencia en 89 partidos."
+                    ),
+                },
+                {
+                    "label": "Casos por revisar",
+                    "value": "2",
+                    "description": (
+                        "Las discrepancias se muestran explícitamente, sin "
+                        "atribuirles una causa no confirmada."
+                    ),
+                },
+            ],
+            "score_exceptions": [
+                {
+                    "match": "América vs. Santos",
+                    "official": "América 3–0 Santos",
+                    "events": "América 2–0 Santos",
+                    "note": (
+                        "El marcador reconstruido desde eventos registra "
+                        "un gol menos para el América."
+                    ),
+                },
+                {
+                    "match": "Toluca vs. América",
+                    "official": "Toluca 0–2 América",
+                    "events": "Toluca 0–1 América",
+                    "note": (
+                        "El marcador reconstruido desde eventos registra "
+                        "un gol menos para el América."
+                    ),
+                },
+            ],
+            "highlights": [
+                {
+                    "title": "Dos fuentes, dos funciones",
+                    "text": (
+                        "El marcador oficial describe el resultado del partido. "
+                        "La reconstrucción por eventos permite auditar el "
+                        "conjunto de datos utilizado en el análisis."
+                    ),
+                },
+                {
+                    "title": "Una discrepancia no explica su causa",
+                    "text": (
+                        "Los datos disponibles documentan las diferencias, "
+                        "pero no confirman por qué ocurren. No se atribuye "
+                        "una causa sin evidencia adicional."
+                    ),
+                },
+            ],
+            "methodology": [
+                "Marcadores de referencia: 91 partidos.",
+                "Coincidencia entre marcador de referencia y eventos: 89 de 91.",
+                (
+                    "Las dos discrepancias se mantienen como excepciones "
+                    "documentadas."
+                ),
+            ],
+        },
+
+        {
+            "id": "balon-parado",
+            "number": "05",
+            "title": "Cuando el balón se detiene",
+            "subtitle": (
+                "En una jugada preparada, cada detalle puede cambiar la historia."
+            ),
+            "intro": (
+                "Córners, tiros libres y saques de banda ofrecen distintas "
+                "formas de reiniciar el juego. Los datos siguientes describen "
+                "los remates y el xG asociado a cada tipo de reinicio en la "
+                "temporada regular."
+            ),
+            "metrics": [
+                {
+                    "label": "Remates tras córner",
+                    "value": "185",
+                    "description": "xG reportado: 18.23.",
+                },
+                {
+                    "label": "Remates tras tiro libre",
+                    "value": "201",
+                    "description": "xG reportado: 24.10.",
+                },
+                {
+                    "label": "Remates tras saque de banda",
+                    "value": "152",
+                    "description": "xG reportado: 17.28.",
+                },
+            ],
+            "set_pieces": [
+                {
+                    "label": "Córners",
+                    "shots": 185,
+                    "xg": 18.23,
+                    "xg_per_shot": 0.0985,
+                },
+                {
+                    "label": "Tiros libres",
+                    "shots": 201,
+                    "xg": 24.10,
+                    "xg_per_shot": 0.1199,
+                },
+                {
+                    "label": "Saques de banda",
+                    "shots": 152,
+                    "xg": 17.28,
+                    "xg_per_shot": 0.1137,
+                },
+            ],
+            "highlights": [
+                {
+                    "title": "No todos los reinicios generan lo mismo",
+                    "text": (
+                        "En la muestra, los remates tras tiro libre tienen "
+                        "el mayor xG por remate entre los tres tipos reportados."
+                    ),
+                },
+                {
+                    "title": "Calidad del remate, no goles garantizados",
+                    "text": (
+                        "El xG por remate estima la calidad de las ocasiones "
+                        "registradas. No equivale a goles anotados ni mide "
+                        "por sí solo la eficiencia de cada reinicio."
+                    ),
+                },
+            ],
+            "methodology": [
+                "Datos correspondientes a la temporada regular.",
+                (
+                    "xG por remate se muestra como una medida descriptiva "
+                    "de la calidad media de los remates registrados."
+                ),
+                (
+                    "Los valores no deben interpretarse como eficiencia por "
+                    "córner, tiro libre o saque de banda, porque no representan "
+                    "el total de reinicios ejecutados."
+                ),
+                (
+                    "La extracción de Liguilla no registra remates en esta "
+                    "categoría. Esto no demuestra que no hubiera producción "
+                    "ofensiva a balón parado."
+                ),
+            ],
+        },
+    ],
+
+    "framework": {
+        "title": "Cómo leer este análisis",
+        "items": [
+            {
+                "term": "Field Tilt",
+                "definition": (
+                    "Proporción de los pases registrados en la zona ofensiva "
+                    "que corresponde al equipo, según la definición aplicada "
+                    "en este análisis."
+                ),
+            },
+            {
+                "term": "PPDA",
+                "definition": (
+                    "Pases elegibles que permite el equipo rival por cada "
+                    "acción defensiva elegible. Un PPDA menor suele indicar "
+                    "una presión más intensa."
+                ),
+            },
+            {
+                "term": "Puntos porcentuales",
+                "definition": (
+                    "Diferencia directa entre dos porcentajes. Por ejemplo, "
+                    "64% menos 31% equivale a 33 puntos porcentuales."
+                ),
+            },
+            {
+                "term": "xG",
+                "definition": (
+                    "Goles esperados: estimación de la probabilidad de que "
+                    "un remate termine en gol, según sus características."
+                ),
+            },
+            {
+                "term": "Datos 360",
+                "definition": (
+                    "Instantáneas vinculadas a eventos que aportan contexto "
+                    "de posiciones, pero no equivalen a un seguimiento continuo "
+                    "de todos los jugadores."
+                ),
+            },
+        ],
+        "limits": [
+            (
+                "El análisis utiliza eventos y 360 asociados a esos eventos; "
+                "no reconstruye el movimiento continuo de todos los jugadores."
+            ),
+            (
+                "Las asociaciones descritas no prueban relaciones de causa "
+                "y efecto."
+            ),
+            (
+                "Las cifras se presentan según los resultados reportados "
+                "en las fases analíticas del proyecto."
+            ),
+        ],
+    },
+}
+
+
+# ------------------------------------------------------------
+# VALIDACIÓN ESTRUCTURAL LIGERA
+# No recalcula métricas ni bloquea la publicación por hipótesis.
+# ------------------------------------------------------------
+
+def validate_structure(data: dict) -> None:
+    if not isinstance(data.get("meta"), dict):
+        raise ValueError("Falta el objeto 'meta'.")
+
+    chapters = data.get("chapters")
+    if not isinstance(chapters, list) or len(chapters) != 5:
+        raise ValueError("Se esperan exactamente cinco capítulos.")
+
+    ids = [chapter.get("id") for chapter in chapters]
+    if len(ids) != len(set(ids)):
+        raise ValueError("Hay identificadores de capítulos duplicados.")
+
+    nav_ids = [item.get("id") for item in data.get("navigation", [])]
+    if ids != nav_ids:
+        raise ValueError(
+            "La navegación debe corresponder al orden de los capítulos."
+        )
+
+
+def main() -> None:
+    validate_structure(DATA)
+
+    OUTPUT_FILE.write_text(
+        json.dumps(DATA, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    print(f"JSON web generado: {OUTPUT_FILE}")
+    print(f"Partidos documentados: {DATA['meta']['matches']}")
+    print(f"Capítulos: {len(DATA['chapters'])}")
+
+
+if __name__ == "__main__":
+    main()

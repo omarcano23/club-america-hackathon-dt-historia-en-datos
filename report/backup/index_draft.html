@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club América · La Historia Táctica de André Jardine | ISAC 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ca-blue-dark: #06101E;
+            --ca-blue-card: #0F1C2E;
+            --ca-blue-border: #1E2D42;
+            --ca-yellow: #F4D03F;
+            --ca-yellow-glow: rgba(244, 208, 63, 0.2);
+            --ca-cream: #F5E6CC;
+            --ca-red: #E74C3C;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--ca-blue-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+
+        /* HERO HEADER */
+        .hero {
+            background: linear-gradient(180deg, rgba(15,28,46,0.9) 0%, var(--ca-blue-dark) 100%),
+                        radial-gradient(circle at 80% 20%, var(--ca-yellow-glow), transparent 40%);
+            border-bottom: 3px solid var(--ca-yellow);
+            padding: 70px 20px 40px;
+            text-align: center;
+        }
+
+        .badge-tag {
+            background: linear-gradient(90deg, var(--ca-yellow), #D4AC0D);
+            color: #06101E;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 6px 18px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px var(--ca-yellow-glow);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+        }
+
+        h1 span { color: var(--ca-yellow); }
+
+        .hero-story {
+            font-size: 1.15rem;
+            color: var(--ca-cream);
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* STICKY NAV BAR */
+        nav.story-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(6, 16, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--ca-blue-border);
+        }
+
+        .nav-btn {
+            background: var(--ca-blue-card);
+            border: 1px solid var(--ca-blue-border);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--ca-yellow);
+            color: var(--ca-blue-dark);
+            border-color: var(--ca-yellow);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--ca-yellow-glow);
+        }
+
+        /* CONTAINER & TAB PANELS */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+        .tab-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s ease-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CARDS & METRICS */
+        .story-card {
+            background: var(--ca-blue-card);
+            border: 1px solid var(--ca-blue-border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--ca-yellow);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .kpi-box {
+            background: rgba(30, 45, 66, 0.5);
+            border: 1px solid var(--ca-blue-border);
+            border-radius: 12px;
+            padding: 22px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-box:hover {
+            transform: translateY(-4px);
+            border-color: var(--ca-yellow);
+        }
+
+        .kpi-box-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .kpi-box-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin: 8px 0;
+        }
+
+        .kpi-box-explain {
+            font-size: 0.85rem;
+            color: var(--ca-cream);
+        }
+
+        /* GRID LAYOUTS */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media(max-width: 900px) { .grid-2col { grid-template-columns: 1fr; } }
+
+        img.visual-asset {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--ca-blue-border);
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .human-explain {
+            background: rgba(244, 208, 63, 0.05);
+            border-left: 4px solid var(--ca-yellow);
+            padding: 18px 22px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+        }
+
+        .human-explain h4 {
+            color: var(--ca-yellow);
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 6px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--ca-blue-border);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <span class="badge-tag">Entregable Oficial · Hackathon ISAC 2026</span>
+        <h1>Club América: <span>El ADN de André Jardine</span></h1>
+        <p class="hero-story">
+            Cómo la data cuantitativa de 91 partidos oficiales (Eventos & StatsBomb 360) revela la metamorfosis de un equipo: de la atracción baja y la asfixia territorial al pragmatismo de los títulos.
+        </p>
+    </header>
+
+    <nav class="story-nav">
+        <button class="nav-btn active" onclick="showTab(event, 'sec-adn')">1. El ADN Azulcrema</button>
+        <button class="nav-btn" onclick="showTab(event, 'sec-anatomia')">2. Anatomía del Juego</button>
+        <button class="nav-btn" onclick="showTab(event, 'sec-metamorfosis')">3. La Metamorfosis</button>
+        <button class="nav-btn" onclick="showTab(event, 'sec-innovacion')">4. Innovación 360 (IPPE)</button>
+        <button class="nav-btn" onclick="showTab(event, 'sec-manual')">5. Manual del Entrenador</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- ACTO 1: EL ADN AZULCREMA -->
+        <div id="sec-adn" class="tab-panel active">
+            <div class="story-card">
+                <div class="card-header-title">👑 Radiografía General del Modelo Jardine (91 Partidos)</div>
+                <p>
+                    Si un analista que nunca vio al América tuviera que definirlo con evidencia en mano, diría que es un equipo que <strong>asume el riesgo de atraer rivales a su propia portería para luego devorar el espacio abierto a sus espaldas</strong>.
+                </p>
+
+                <div class="kpi-row">
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Dominio del Terreno</div>
+                        <div class="kpi-box-value">59.8%</div>
+                        <div class="kpi-box-explain"><strong>Field Tilt:</strong> Casi 6 de cada 10 pases en el último tercio son del América.</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Asfixia Defensiva</div>
+                        <div class="kpi-box-value">2.82</div>
+                        <div class="kpi-box-explain"><strong>PPDA:</strong> Apenas permite 2.8 pases rivales antes de saltar a presionar.</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Superación de Líneas</div>
+                        <div class="kpi-box-value">95.7%</div>
+                        <div class="kpi-box-explain"><strong>Índice IPPE (360):</strong> Efectividad al filtrar balones bajo cerco rival.</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Efectividad de Gol</div>
+                        <div class="kpi-box-value">+8.5</div>
+                        <div class="kpi-box-explain">162 Goles anotados frente a 153.5 xG esperados.</div>
+                    </div>
+                </div>
+
+                <div class="human-explain">
+                    <h4>💡 ¿Qué significan estos números para el aficionado o periodista?</h4>
+                    <p>
+                        Significa que el América no es un equipo "paciente" que toca la pelota horizontalmente sin lastimar. Su $59.8\%$ de dominio territorial se combina con una recuperación ultrarrápida ($PPDA\ 2.82$) que obliga al rival a jugar bajo constante ahogo en su propia cancha.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTO 2: ANATOMÍA DEL JUEGO -->
+        <div id="sec-anatomia" class="tab-panel">
+            <div class="story-card">
+                <div class="card-header-title">🗺️ Circuitos de Salida, Red de Pases & Tiros</div>
+                <div class="grid-2col">
+                    <div>
+                        <h3>1. Salida y Zona de Tránsito (48.9% en Mediocampo)</h3>
+                        <p>El América acumula pases en el carril central e izquierdo (74.2% combinado). El doble pivote (Fidalgo - Dos Santos) ejerce como imán de marcas.</p>
+                        <img src="assets/build_up_lanes.png" alt="Salida por Carril" class="visual-asset">
+                    </div>
+                    <div>
+                        <h3>2. Posicionamiento Promedio & Red de Conexiones</h3>
+                        <p>Visualización en terreno reglamentario: la densidad de líneas doradas muestra cómo la pelota transita obligatoriamente por el eje central antes de romper hacia las bandas.</p>
+                        <img src="assets/passing_network_v2.png" alt="Red de Pases Táctica" class="visual-asset">
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="card-header-title">🎯 Calidad de Finalización & Mapeo xG</div>
+                <div class="grid-2col">
+                    <div>
+                        <h3>Mapa de Remates (1,217 Tiros Registrados)</h3>
+                        <p>El equipo registra un xG promedio de $0.126$ por tiro, lo que confirma que el América de Jardine evita los disparos lejanos de baja probabilidad y busca el remate dentro del área grande.</p>
+                        <img src="assets/shot_map_v2.png" alt="Mapa de Tiros xG" class="visual-asset">
+                    </div>
+                    <div>
+                        <div class="human-explain" style="margin-top:30px;">
+                            <h4>⚽ Factor Balón Parado (ABP)</h4>
+                            <p>De los 162 goles totales, <strong>39 goles se originaron en jugadas a balón parado</strong> (Tiros libres y córners), produciendo un acumulado de $42.33\ xG$. Esto revela un trabajo táctico refinado en la estrategia de laboratorio de Jardine.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTO 3: LA METAMORFOSIS -->
+        <div id="sec-metamorfosis" class="tab-panel">
+            <div class="story-card">
+                <div class="card-header-title">📈 Evolución entre Temporadas & Reacción al Marcador</div>
+                <div class="grid-2col">
+                    <div>
+                        <h3>Evolución Táctica (2023/24 vs 2024/25)</h3>
+                        <p>Aunque el volumen de peligro generado bajó levemente ($83.71 	o 69.83\ xG$), la intensidad defensiva se volvió asfixiante: el PPDA descendió de $3.15$ a $2.53$.</p>
+                        <img src="assets/season_evolution.png" alt="Evolución Temporadas" class="visual-asset">
+                    </div>
+                    <div>
+                        <h3>Comportamiento según el Marcador (Gamestate)</h3>
+                        <p>Cuando el América va <strong>PERDIENDO</strong>, su dominio territorial se dispara al <strong>74.7%</strong> y su presión se vuelve insostenible ($PPDA\ 2.16$). Al ir <strong>GANANDO</strong>, cede terreno ($48.0\%$) para liquidar en transición rápida.</p>
+                        <img src="assets/gamestate_v2.png" alt="Reacción por Marcador" class="visual-asset">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTO 4: INNOVACIÓN 360 (IPPE) -->
+        <div id="sec-innovacion" class="tab-panel">
+            <div class="story-card">
+                <div class="card-header-title">🚀 Métrica de Innovación: IPPE 360 (Pressure-Bypass Index)</div>
+                <p>
+                    Utilizando las cámaras de congelamiento espacial de <strong>StatsBomb 360</strong>, creamos el indicador <strong>IPPE</strong> para medir la capacidad del América de filtrar balones cuando el rival le pone una "jaula" de 3 o más defensores al receptor.
+                </p>
+                <div class="kpi-row">
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Pases Progresivos 360</div>
+                        <div class="kpi-box-value">9,876</div>
+                        <div class="kpi-box-explain">Eventos con marco de visión espacial activo.</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Superaciones Exitosas</div>
+                        <div class="kpi-box-value">9,448</div>
+                        <div class="kpi-box-explain">Jaulas de presión rival destruidas con pase.</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-box-title">Rivales Eliminados / Pase</div>
+                        <div class="kpi-box-value">6.58</div>
+                        <div class="kpi-box-explain">Promedio de defensores superados por pase filtrado.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTO 5: MANUAL DEL ENTRENADOR -->
+        <div id="sec-manual" class="tab-panel">
+            <div class="story-card">
+                <div class="card-header-title">💡 Recomendaciones Accionables para el Cuerpo Técnico</div>
+                <div class="human-explain">
+                    <h4>1. Vigilancia Ofensiva en la Zona de Tránsito (Tercio Medio)</h4>
+                    <p>Como el $48.9\%$ de los pases ocurren en campo medio, una pérdida ahí desorganiza la estructura. Se recomienda al doble pivote mantener coberturas escalonadas para evitar contragolpes directos.</p>
+                </div>
+                <div class="human-explain">
+                    <h4>2. No Renunciar al "Atractor de Presión"</h4>
+                    <p>Con un índice IPPE del $95.7\%$ y $6.58$ rivales superados por pase, la salida baja es el mayor activo del América. Se debe incentivar al arquero y centrales a seguir atrayendo la presión rival.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Hackathon ISAC 2026 · Club América & ITAM Sports Analytics · Investigación Basada en Datos Reales de Eventos 360</p>
+    </footer>
+
+    <script>
+        function showTab(evt, tabId) {
+            var i, panels, btns;
+            panels = document.getElementsByClassName("tab-panel");
+            for (i = 0; i < panels.length; i++) {
+                panels[i].classList.remove("active");
+            }
+            btns = document.getElementsByClassName("nav-btn");
+            for (i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

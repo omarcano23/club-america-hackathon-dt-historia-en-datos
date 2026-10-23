@@ -29,6 +29,9 @@ data/synthetic/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/synthetic/.gitkeep
+# Grandes respaldos de datos, no necesarios para la entrega web
+data/processed/backup/
+EOF
 
 # Local outputs / OS
 report/*.html
