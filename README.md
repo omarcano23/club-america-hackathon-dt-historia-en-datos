@@ -1,7 +1,9 @@
 Club América: DT, historia en datos
+[Web](https://omarcano23.github.io/club-america-hackathon-dt-historia-en-datos/report/)
+<img width="2474" height="1552" alt="image" src="https://github.com/user-attachments/assets/5864d921-b205-49cf-b9d8-30abc3dbd166" />
 
 Informe interactivo de análisis táctico del Club América.
-👉 [Ver informe interactivo](report/index.html)
+👉 [Web](https://omarcano23.github.io/club-america-hackathon-dt-historia-en-datos/report/)
 
 Este proyecto analiza la identidad de juego del Club América de André Jardine durante las temporadas 2023-24 y 2024-25 a partir de datos de eventos y StatsBomb 360. 
 
